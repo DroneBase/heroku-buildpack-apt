@@ -40,8 +40,8 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 topic "Updating apt cache"
 apt-get $APT_OPTIONS update | indent
 
-topic "Installing HTTPS transport"
-apt-get $APT_OPTIONS install -y --force-yes apt-transport-https | indent
+#topic "Installing HTTPS transport"
+#apt-get $APT_OPTIONS install -y --force-yes apt-transport-https | indent
 
 if [[ -e $BUILD_DIR/Aptsources ]]; then
   topic "Enabling custom apt sources"
