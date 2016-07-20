@@ -102,6 +102,12 @@ fi
 topic "Writing profile script"
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
+
+for f in `find $HOME/.apt/usr/lib -type d -printf '%d\t%P\n' | sort -r -nk1 | cut -f2-`
+do
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.apt/usr/lib/$f;
+done
+
 export PATH="\$HOME/.apt/usr/bin:\$PATH"
 export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$LD_LIBRARY_PATH"
 export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$LIBRARY_PATH"
